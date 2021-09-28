@@ -9,12 +9,12 @@ public class Posts {
     @Override
     public String toString() {
         return "Posts{" +
-                "postId=" + postId +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", body='" + body + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+                "\npostId=" + postId +
+                ",\nid=" + id +
+                ",\nname='" + name + '\'' +
+                ",\nbody='" + body + '\'' +
+                ",\nemail='" + email + '\'' +
+                "\n}";
     }
 
     public Long getPostId() {
