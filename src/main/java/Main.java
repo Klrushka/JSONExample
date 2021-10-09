@@ -1,5 +1,9 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import helpers.Helper;
+import requests.HttpGetRequest;
+import requests.HttpPostRequest;
+import requests.HttpPutRequest;
 
 import java.io.IOException;
 import java.net.Authenticator;
@@ -12,41 +16,19 @@ import java.util.List;
 
 public class Main {
 
-    private static final String uri = "https://jsonplaceholder.typicode.com/comments?postId=1";
-    private static final String line = "--------------------------------------------------------------------------------------------------------------------------";
+    private static final String uriGet = "https://jsonplaceholder.typicode.com/comments?postId=1";
+    private static final String uriPost = "https://jsonplaceholder.typicode.com/posts";
+    private static final String uriPut = "https://jsonplaceholder.typicode.com/posts/1";
 
 
     public static void main(String[] args) {
 
+        Helper.get(uriGet);
 
-        HttpClient httpClient = HttpClient.newHttpClient();
+        Helper.post(uriGet,uriPost);
 
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .GET()
-                .header("accept", "application/json")
-                .uri(URI.create(uri))
-                .build();
+        Helper.put(uriGet,uriPut);
 
 
-        try {
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println(response.body());
-
-
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            List<Posts> posts = objectMapper.readValue(response.body(), new TypeReference<List<Posts>>() {
-            });
-
-
-            for (Posts post : posts) {
-                System.out.printf("%s\n%s\n", post, line);
-            }
-
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

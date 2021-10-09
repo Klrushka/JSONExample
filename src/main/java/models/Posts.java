@@ -1,3 +1,5 @@
+package models;
+
 public class Posts {
     private Long postId;
     private Long id;
@@ -8,7 +10,7 @@ public class Posts {
 
     @Override
     public String toString() {
-        return "Posts{" +
+        return "models.Posts{" +
                 "\npostId=" + postId +
                 ",\nid=" + id +
                 ",\nname='" + name + '\'' +
