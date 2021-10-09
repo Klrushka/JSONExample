@@ -1,18 +1,5 @@
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import helpers.Helper;
-import requests.HttpGetRequest;
-import requests.HttpPostRequest;
-import requests.HttpPutRequest;
 
-import java.io.IOException;
-import java.net.Authenticator;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
-import java.util.List;
+import helpers.Helper;
 
 public class Main {
 

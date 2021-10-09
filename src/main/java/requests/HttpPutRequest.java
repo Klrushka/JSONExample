@@ -12,7 +12,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 public class HttpPutRequest {
-    private static final String line = "--------------------------------------------------------------------------------------------------------------------------";
 
     final static Logger LOGGER = Logger.getLogger(HttpGetRequest.class);
 
