@@ -1,6 +1,7 @@
 package requests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import interfaces.Request;
 import models.Posts;
 import org.apache.log4j.Logger;
 
@@ -11,11 +12,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-public class HttpPutRequest {
+public class HttpPutRequest<T> implements Request {
 
     final static Logger LOGGER = Logger.getLogger(HttpGetRequest.class);
 
-    public static void put(String uriGet, String uriPut) {
+    public void doRequest(String... uri) {
 
 
         System.out.println("PUT REQUEST");
@@ -23,14 +24,16 @@ public class HttpPutRequest {
         HttpClient httpClient = HttpClient.newHttpClient();
 
 
-        List<Posts> posts =  HttpGetRequest.getModels(uriGet);
+        HttpGetRequest<T> request = new HttpGetRequest<>();
+
+        List<T>  posts =  request.getModels(uri[0]);
 
 
 
         try {
 
 
-            for (Posts post : posts) {
+            for (T post : posts) {
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,7 +44,7 @@ public class HttpPutRequest {
                 HttpRequest httpRequest = HttpRequest.newBuilder()
                         .PUT(HttpRequest.BodyPublishers.ofString(s))
                         .header("accept", "application/json")
-                        .uri(URI.create(uriPut))
+                        .uri(URI.create(uri[2]))
                         .build();
 
                 HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

@@ -2,6 +2,7 @@ package requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import interfaces.Request;
 import models.Posts;
 import org.apache.log4j.Logger;
 
@@ -13,19 +14,23 @@ import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
 
-public class HttpGetRequest {
+public class HttpGetRequest<T> implements Request {
 
     private static final String line = "--------------------------------------------------------------------------------------------------------------------------";
 
     final static Logger LOGGER = Logger.getLogger(HttpGetRequest.class);
 
-    public static void get(String uri) {
+    public void doRequest(String... uri) {
         HttpClient httpClient = HttpClient.newHttpClient();
+
+
+        System.out.println("GET REQUEST");
+
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .header("accept", "application/json")
-                .uri(URI.create(uri))
+                .uri(URI.create(uri[0]))
                 .build();
 
         LOGGER.info("Object HttpRequest created");
@@ -41,13 +46,13 @@ public class HttpGetRequest {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            List<Posts> posts = objectMapper.readValue(response.body(), new TypeReference<>() {
+            List<T> posts = objectMapper.readValue(response.body(), new TypeReference<>() {
             });
 
 
             LOGGER.info("Post objects mapped");
 
-            for (Posts post : posts) {
+            for (T post : posts) {
                 System.out.printf("%s\n%s\n", post, line);
             }
 
@@ -64,8 +69,8 @@ public class HttpGetRequest {
     }
 
 
-    public static List<Posts> getModels (String uri){
-        List<Posts> posts = Collections.emptyList();
+    public List<T> getModels(String uri){
+        List<T> posts = Collections.emptyList();
 
         HttpClient httpClient = HttpClient.newHttpClient();
 
