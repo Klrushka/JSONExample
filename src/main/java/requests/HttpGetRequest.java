@@ -46,15 +46,13 @@ public class HttpGetRequest<T> implements Request {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            List<T> posts = objectMapper.readValue(response.body(), new TypeReference<>() {
+            T posts = objectMapper.readValue(response.body(), new TypeReference<>() {
             });
 
 
             LOGGER.info("Post objects mapped");
 
-            for (T post : posts) {
-                System.out.printf("%s\n%s\n", post, line);
-            }
+            System.out.println(posts + "\n");
 
             LOGGER.info("Posts displayed");
 
@@ -69,8 +67,8 @@ public class HttpGetRequest<T> implements Request {
     }
 
 
-    public List<T> getModels(String uri){
-        List<T> posts = Collections.emptyList();
+    public T getModels(String uri){
+        T posts = null;
 
         HttpClient httpClient = HttpClient.newHttpClient();
 

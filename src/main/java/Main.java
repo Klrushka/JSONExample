@@ -4,6 +4,7 @@ import interfaces.Request;
 import interfaces.RequestFactory;
 import models.Posts;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +21,7 @@ public class Main {
 
         System.out.println("What is request you need?(get/post/put)");
 
-        FactoryGetter<Posts> factoryGetter = new FactoryGetter<>();
+        FactoryGetter<ArrayList<Posts>> factoryGetter = new FactoryGetter<>();
 
         RequestFactory requestFactory = factoryGetter.getFactory(new Scanner(System.in).nextLine());
 

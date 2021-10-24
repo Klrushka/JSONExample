@@ -26,18 +26,18 @@ public class HttpPutRequest<T> implements Request {
 
         HttpGetRequest<T> request = new HttpGetRequest<>();
 
-        List<T>  posts =  request.getModels(uri[0]);
+        T  posts =  request.getModels(uri[0]);
 
 
 
         try {
 
 
-            for (T post : posts) {
+
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
-                String s = objectMapper.writeValueAsString(post);
+                String s = objectMapper.writeValueAsString(posts);
 
                 LOGGER.info("Post objects turn into string");
 
@@ -53,10 +53,9 @@ public class HttpPutRequest<T> implements Request {
 
                 System.out.println(response);
                 System.out.println(response.body());
-            }
+
 
             LOGGER.info("Posts put request info displayed");
-            ;
 
         } catch (IOException e) {
             e.printStackTrace();

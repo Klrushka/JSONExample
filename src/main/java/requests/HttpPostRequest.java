@@ -29,7 +29,7 @@ public class HttpPostRequest<T> implements Request {
 
         HttpGetRequest<T> request = new HttpGetRequest<>();
 
-        List<T>  posts =  request.getModels(uri[0]);
+        T  posts =  request.getModels(uri[0]);
 
 
 
@@ -38,11 +38,10 @@ public class HttpPostRequest<T> implements Request {
 
 
 
-            for (T post : posts) {
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
-                String s = objectMapper.writeValueAsString(post);
+                String s = objectMapper.writeValueAsString(posts);
 
                 LOGGER.info("Post objects turn into string");
 
@@ -58,10 +57,10 @@ public class HttpPostRequest<T> implements Request {
 
                 System.out.println(response);
                 System.out.println(response.body());
-            }
+
 
             LOGGER.info("Posts post request info displayed");
-;
+
 
         } catch (IOException e) {
             e.printStackTrace();
